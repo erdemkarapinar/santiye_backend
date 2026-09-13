@@ -14,6 +14,7 @@ class Santiye extends Model
         'baslangic_zamani',
         'bitis_zamani',
         'user_id',
+        'location',
     ];
     public function user(): BelongsTo
     {

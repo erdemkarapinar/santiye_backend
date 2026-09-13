@@ -28,6 +28,7 @@ class SantiyeController extends Controller
             'baslangic_zamani' => 'required|date',
             'bitis_zamani'     => 'required|date|after:baslangic_zamani',
             'user_id' => 'required|exists:users,id',
+            'location' => 'nullable|string|max:255',
         ]);
 
         $santiye = Santiye::create($validated);
