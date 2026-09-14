@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Santiye;
+use App\Models\GunlukKayit;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
@@ -33,5 +34,9 @@ class User extends Authenticatable
     public function santiye(): HasMany
     {
         return $this->hasMany(Santiye::class);
+    }
+    public function kayit(): HasMany
+    {
+        return $this->hasMany(GunlukKayit::class);
     }
 }

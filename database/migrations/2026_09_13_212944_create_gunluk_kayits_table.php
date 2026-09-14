@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('temperature', 5, 2)->nullable();
             $table->string('not');
             $table->string('ekipman');
-            $table->unsignedDecimal('toplam ücret', 10, 2);
+            $table->decimal('toplam_ucret', 8, 2)->unsigned();
             $table->timestamps();
         });
     }
