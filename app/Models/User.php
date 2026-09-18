@@ -39,4 +39,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(GunlukKayit::class);
     }
+        public function gorev(): HasMany
+    {
+        return $this->hasMany(GunlukKayit::class);
+    }
 }

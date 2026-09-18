@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Santiye;
 
 class Gorevler extends Model
 {
@@ -12,4 +14,12 @@ class Gorevler extends Model
         'title',
         'description',
     ];
+        public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function santiye(): HasMany
+    {
+        return $this->belongsTo(Santiye::class);
+    }
 }
