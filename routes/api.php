@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\SantiyeController;
 use App\Http\Controllers\Api\GunlukKayitController;
 use App\Http\Controllers\Api\GorevlerController;
 use App\Http\Controllers\Api\KayitlarController;
+use App\Http\Controllers\Api\RaporController;
 
 Route::get('/santiye', [SantiyeController::class, 'index']);
 Route::post('/santiye', [SantiyeController::class, 'store']);
@@ -18,3 +19,5 @@ Route::post('/gorev', [GorevlerController::class, 'store']);
 
 Route::get('/kayit', [KayitlarController::class, 'index']);
 Route::post('/kayit', [KayitlarController::class, 'store']);
+
+Route::get('/raporlar', [RaporController::class, 'index']);
