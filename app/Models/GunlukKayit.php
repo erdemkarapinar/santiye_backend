@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Kayitlar;
 
 class GunlukKayit extends Model
 {
@@ -19,5 +20,9 @@ class GunlukKayit extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+    public function kayit()
+    {
+        return $this->morphOne(Kayitlar::class, 'kayit');
     }
 }

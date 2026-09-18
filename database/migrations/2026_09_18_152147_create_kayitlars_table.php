@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('kayitlars', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('user_id')
-                ->constrained('users')
+                ->constrained()
                 ->cascadeOnDelete();
-            $table->foreignId('santiye_id')
-                ->constrained('santiyes')
-                ->cascadeOnDelete();
-            
+
+            $table->morphs('kayit');
+
+            $table->string('aciklama')->nullable();
+
             $table->timestamps();
         });
     }
