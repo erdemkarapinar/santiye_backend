@@ -15,6 +15,9 @@ class GunlukKayit extends Model
         'temperature',
         'not',
         'ekipman',
+        'harcama_kategori',
+        'harcama_aciklama',
+        'harcama_tutar',
         'toplam_ucret',
     ];
     public function user(): BelongsTo
