@@ -7,6 +7,15 @@ use App\Http\Controllers\Api\GunlukKayitController;
 use App\Http\Controllers\Api\GorevlerController;
 use App\Http\Controllers\Api\KayitlarController;
 use App\Http\Controllers\Api\RaporController;
+use App\Http\Controllers\Api\AuthController;
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/me', [AuthController::class, 'me']);
+});
 
 Route::get('/santiye', [SantiyeController::class, 'index']);
 Route::post('/santiye', [SantiyeController::class, 'store']);
