@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Kayitlar;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class GunlukKayit extends Model
 {
