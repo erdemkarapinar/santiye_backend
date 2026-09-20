@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\RaporController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\HataliImalatController;
 use App\Http\Controllers\Api\MalzemeStoguController;
+use App\Http\Controllers\Api\BetonFisiController;
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -33,6 +35,15 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/malzeme-stoklari', [
         MalzemeStoguController::class,
+        'store'
+    ]);
+    Route::get('/beton-fisleri', [
+        BetonFisiController::class,
+        'index'
+    ]);
+
+    Route::post('/beton-fisleri', [
+        BetonFisiController::class,
         'store'
     ]);
 });

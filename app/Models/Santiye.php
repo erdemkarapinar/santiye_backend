@@ -29,4 +29,8 @@ class Santiye extends Model
     {
         return $this->hasMany(MalzemeStogu::class);
     }
+        public function betonFisleri()
+    {
+        return $this->hasMany(BetonFisi::class);
+    }
 }
