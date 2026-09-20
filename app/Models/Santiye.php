@@ -5,6 +5,7 @@ use App\Models\User;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Santiye extends Model
 {
@@ -19,5 +20,9 @@ class Santiye extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+    public function hataliImalatlar()
+    {
+        return $this->hasMany(HataliImalat::class);
     }
 }

@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SantiyeController;
 use App\Http\Controllers\Api\GunlukKayitController;
@@ -8,13 +7,25 @@ use App\Http\Controllers\Api\GorevlerController;
 use App\Http\Controllers\Api\KayitlarController;
 use App\Http\Controllers\Api\RaporController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\HataliImalatController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
+
     Route::post('/logout', [AuthController::class, 'logout']);
+
     Route::get('/me', [AuthController::class, 'me']);
+
+    Route::post('/hatali-imalatlar', [
+        HataliImalatController::class,
+        'store'
+    ]);
+    Route::get('/hatali-imalatlar', [
+        HataliImalatController::class,
+        'index'
+    ]);
 });
 
 Route::get('/santiye', [SantiyeController::class, 'index']);
