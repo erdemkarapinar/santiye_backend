@@ -54,4 +54,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(HataliImalat::class);
     }
+    public function malzemeler()
+    {
+        return $this->hasMany(MalzemeStogu::class);
+    }
 }

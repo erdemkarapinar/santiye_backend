@@ -25,4 +25,8 @@ class Santiye extends Model
     {
         return $this->hasMany(HataliImalat::class);
     }
+    public function malzemeler()
+    {
+        return $this->hasMany(MalzemeStogu::class);
+    }
 }
