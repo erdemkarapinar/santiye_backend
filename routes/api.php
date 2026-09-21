@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\HataliImalatController;
 use App\Http\Controllers\Api\MalzemeStoguController;
 use App\Http\Controllers\Api\BetonFisiController;
+use App\Http\Controllers\Api\KantarFisiController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -19,6 +20,20 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::get('/me', [AuthController::class, 'me']);
+
+    Route::get('/santiye', [SantiyeController::class, 'index']);
+    Route::post('/santiye', [SantiyeController::class, 'store']);
+
+    Route::get('/gunlukkayit', [GunlukKayitController::class, 'index']);
+    Route::post('/gunlukkayit', [GunlukKayitController::class, 'store']);
+
+    Route::get('/gorev', [GorevlerController::class, 'index']);
+    Route::post('/gorev', [GorevlerController::class, 'store']);
+
+    Route::get('/kayit', [KayitlarController::class, 'index']);
+    Route::post('/kayit', [KayitlarController::class, 'store']);
+
+    Route::get('/raporlar', [RaporController::class, 'index']);
 
     Route::post('/hatali-imalatlar', [
         HataliImalatController::class,
@@ -46,18 +61,15 @@ Route::middleware('auth:sanctum')->group(function () {
         BetonFisiController::class,
         'store'
     ]);
+
+    Route::get('/kantar-fisleri', [
+        KantarFisiController::class,
+        'index'
+    ]);
+
+    Route::post('/kantar-fisleri', [
+        KantarFisiController::class,
+        'store'
+    ]);
 });
 
-Route::get('/santiye', [SantiyeController::class, 'index']);
-Route::post('/santiye', [SantiyeController::class, 'store']);
-
-Route::get('/gunlukkayit', [GunlukKayitController::class, 'index']);
-Route::post('/gunlukkayit', [GunlukKayitController::class, 'store']);
-
-Route::get('/gorev', [GorevlerController::class, 'index']);
-Route::post('/gorev', [GorevlerController::class, 'store']);
-
-Route::get('/kayit', [KayitlarController::class, 'index']);
-Route::post('/kayit', [KayitlarController::class, 'store']);
-
-Route::get('/raporlar', [RaporController::class, 'index']);
