@@ -18,25 +18,44 @@ class SantiyeController extends Controller
             'data' => $santiye,
         ], 200);
     }
-
-    // Yeni santiye ekleme
-    public function store(Request $request)
+   public function store(Request $request)
     {
         $validated = $request->validate([
-            'firma_adi'        => 'required|string|max:255',
-            'santiye_adi'      => 'required|string|max:255',
-            'baslangic_zamani' => 'required|date',
-            'bitis_zamani'     => 'required|date|after:baslangic_zamani',
-            'user_id' => 'required|exists:users,id',
+            'firma_adi' => 'required|string|max:255',
+            'santiye_adi' => 'required|string|max:255',
+            'baslangic_zamani' => 'nullable|date',
+            'bitis_zamani' => 'nullable|date|after_or_equal:baslangic_zamani',
             'location' => 'nullable|string|max:255',
         ]);
 
-        $santiye = Santiye::create($validated);
+        // Giriş yapan kullanıcı
+        $user = $request->user();
+
+        // Şantiyeyi oluştur
+        $santiye = Santiye::create([
+            'firma_adi' => $validated['firma_adi'],
+            'santiye_adi' => $validated['santiye_adi'],
+            'baslangic_zamani' => $validated['baslangic_zamani'] ?? null,
+            'bitis_zamani' => $validated['bitis_zamani'] ?? null,
+            'location' => $validated['location'] ?? null,
+            'user_id' => $user->id,
+        ]);
+
+        // Şantiyeyi oluşturan kullanıcıyı otomatik olarak
+        // santiye_user pivot tablosuna ekle
+        $santiye->users()->syncWithoutDetaching([
+            $user->id
+        ]);
+
+        // İlişkileri yükle
+        $santiye->load([
+            'user',
+            'users'
+        ]);
 
         return response()->json([
-            'success' => true,
-            'message' => 'Santiye başarıyla oluşturuldu.',
-            'data' => $santiye,
+            'message' => 'Şantiye başarıyla oluşturuldu.',
+            'data' => $santiye
         ], 201);
     }
 }

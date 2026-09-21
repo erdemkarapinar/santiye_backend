@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\MalzemeStoguController;
 use App\Http\Controllers\Api\BetonFisiController;
 use App\Http\Controllers\Api\KantarFisiController;
 use App\Http\Controllers\Api\IrsaliyeController;
+use App\Http\Controllers\Api\ReferansController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -75,5 +76,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/irsaliyeler', [IrsaliyeController::class, 'index']);
     Route::post('/irsaliyeler', [IrsaliyeController::class, 'store']);
+
+    Route::post('/referanslar', [ReferansController::class, 'store']);
 });
 

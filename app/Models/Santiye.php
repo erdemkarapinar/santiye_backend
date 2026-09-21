@@ -33,4 +33,15 @@ class Santiye extends Model
     {
         return $this->hasMany(BetonFisi::class);
     }
+    public function referanslar()
+    {
+        return $this->hasMany(Referans::class);
+    }
+    public function users()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'santiye_user'
+        )->withTimestamps();
+    }
 }

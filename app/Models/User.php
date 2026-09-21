@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\Santiye;
 use App\Models\GunlukKayit;
 
@@ -61,5 +62,21 @@ class User extends Authenticatable
     public function betonFisleri()
     {
         return $this->hasMany(BetonFisi::class);
+    }
+    public function olusturduguReferanslar()
+    {
+        return $this->hasMany(Referans::class, 'olusturan_user_id');
+    }
+
+    public function kullandigiReferans()
+    {
+        return $this->hasOne(Referans::class, 'kullanan_user_id');
+    }
+    public function santiyeler()
+    {
+        return $this->belongsToMany(
+            Santiye::class,
+            'santiye_user'
+        )->withTimestamps();
     }
 }

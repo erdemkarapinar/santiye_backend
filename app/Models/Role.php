@@ -15,4 +15,8 @@ class Role extends Model
     {
         return $this->hasMany(User::class);
     }
+    public function referanslar()
+    {
+        return $this->hasMany(Referans::class);
+    }
 }
