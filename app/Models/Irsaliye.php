@@ -2,28 +2,30 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class MalzemeStogu extends Model
+class Irsaliye extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'user_id',
         'santiye_id',
+        'irsaliye_fotografi',
+        'malzeme_cinsi',
         'malzeme_adi',
-        'birim',
-        'miktar',
-        'min_stok',
-        'birim_fiyat',
-        'aktif',
+        'malzeme_miktari',
+        'tedarikci',
+        'arac_plakasi',
+        'tarih',
         'not',
     ];
 
     protected $casts = [
-        'miktar' => 'decimal:2',
-        'min_stok' => 'decimal:2',
-        'birim_fiyat' => 'decimal:2',
-        'aktif' => 'boolean',
+        'malzeme_miktari' => 'decimal:2',
+        'tarih' => 'date',
     ];
 
     public function user()

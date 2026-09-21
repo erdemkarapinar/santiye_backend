@@ -30,6 +30,7 @@ class MalzemeStoguController extends Controller
             'miktar' => 'required|numeric|min:0',
             'min_stok' => 'required|numeric|min:0',
             'birim_fiyat' => 'required|numeric|min:0',
+            'aktif' => 'required|boolean',
             'not' => 'nullable|string',
         ]);
 

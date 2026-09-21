@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\HataliImalatController;
 use App\Http\Controllers\Api\MalzemeStoguController;
 use App\Http\Controllers\Api\BetonFisiController;
 use App\Http\Controllers\Api\KantarFisiController;
+use App\Http\Controllers\Api\IrsaliyeController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -71,5 +72,8 @@ Route::middleware('auth:sanctum')->group(function () {
         KantarFisiController::class,
         'store'
     ]);
+
+    Route::get('/irsaliyeler', [IrsaliyeController::class, 'index']);
+    Route::post('/irsaliyeler', [IrsaliyeController::class, 'store']);
 });
 
