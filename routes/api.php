@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\BetonFisiController;
 use App\Http\Controllers\Api\KantarFisiController;
 use App\Http\Controllers\Api\IrsaliyeController;
 use App\Http\Controllers\Api\ReferansController;
+use App\Http\Controllers\Api\EkibimController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -78,5 +79,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/irsaliyeler', [IrsaliyeController::class, 'store']);
 
     Route::post('/referanslar', [ReferansController::class, 'store']);
+
+    Route::get('/ekibim', [EkibimController::class, 'index']);
+    Route::post('/ekibim/{user}/santiye-ata', [
+        EkibimController::class,
+        'santiyeAta'
+    ]);
 });
 
