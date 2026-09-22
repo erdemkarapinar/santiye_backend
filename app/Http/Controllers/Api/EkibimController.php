@@ -168,4 +168,57 @@ class EkibimController extends Controller
             ]
         ], 200);
     }
+    public function santiyeCikar(
+        Request $request,
+        User $user,
+        \App\Models\Santiye $santiye
+    ) {
+        $girisYapanUser = $request->user();
+
+        // Personel giriş yapan kullanıcının ekibinde mi?
+        $ekipUyesiMi = $girisYapanUser
+            ->olusturduguReferanslar()
+            ->where('kullanan_user_id', $user->id)
+            ->exists();
+
+        if (!$ekipUyesiMi) {
+            return response()->json([
+                'message' => 'Bu kullanıcı sizin ekibinizde bulunmuyor.'
+            ], 403);
+        }
+
+        // Şantiye giriş yapan kullanıcı tarafından mı oluşturuldu?
+        $santiyeSizeAitMi = $girisYapanUser
+            ->santiye()
+            ->where('id', $santiye->id)
+            ->exists();
+
+        if (!$santiyeSizeAitMi) {
+            return response()->json([
+                'message' => 'Bu şantiye size ait değil.'
+            ], 403);
+        }
+
+        // Personelin bu şantiyede gerçekten kaydı var mı?
+        $atanmisMi = $user->santiyeler()
+            ->where('santiyes.id', $santiye->id)
+            ->exists();
+
+        if (!$atanmisMi) {
+            return response()->json([
+                'message' => 'Bu personel zaten bu şantiyede görevli değil.'
+            ], 404);
+        }
+
+        // Pivot tablosundan sadece bu şantiye-personel ilişkisini sil
+        $user->santiyeler()->detach($santiye->id);
+
+        return response()->json([
+            'message' => 'Personel şantiyeden başarıyla çıkarıldı.',
+            'data' => [
+                'personel_id' => $user->id,
+                'cikarilan_santiye_id' => $santiye->id,
+            ]
+        ], 200);
+    }
 }

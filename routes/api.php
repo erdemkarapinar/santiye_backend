@@ -90,5 +90,9 @@ Route::middleware('auth:sanctum')->group(function () {
         '/ekibim/{user}/santiyeler',
         [EkibimController::class, 'personelinSantiyeleri']
     );
+    Route::delete(
+        '/ekibim/{user}/santiye/{santiye}',
+        [EkibimController::class, 'santiyeCikar']
+    );
 });
 
