@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Kayitlar;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class GunlukKayit extends Model
 {
@@ -28,5 +29,12 @@ class GunlukKayit extends Model
     public function kayit()
     {
         return $this->morphOne(Kayitlar::class, 'kayit');
+    }
+    public function personeller()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'gunluk_kayit_user'
+        )->withTimestamps();
     }
 }

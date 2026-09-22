@@ -44,4 +44,12 @@ class Santiye extends Model
             'santiye_user'
         )->withTimestamps();
     }
+    public function puantajlar()
+    {
+        return $this->hasMany(Puantaj::class);
+    }
+    public function metrajlar()
+    {
+        return $this->hasMany(Metraj::class);
+    }
 }

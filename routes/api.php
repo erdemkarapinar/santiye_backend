@@ -14,6 +14,8 @@ use App\Http\Controllers\Api\KantarFisiController;
 use App\Http\Controllers\Api\IrsaliyeController;
 use App\Http\Controllers\Api\ReferansController;
 use App\Http\Controllers\Api\EkibimController;
+use App\Http\Controllers\Api\PuantajController;
+use App\Http\Controllers\Api\MetrajController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -94,5 +96,8 @@ Route::middleware('auth:sanctum')->group(function () {
         '/ekibim/{user}/santiye/{santiye}',
         [EkibimController::class, 'santiyeCikar']
     );
+    Route::get('/puantaj', [PuantajController::class, 'index']);
+
+    Route::post('/metraj', [MetrajController::class, 'store']);
 });
 

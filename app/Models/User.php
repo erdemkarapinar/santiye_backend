@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\Santiye;
 use App\Models\GunlukKayit;
+use App\Models\Metraj;
 
 #[Fillable(['name', 'email', 'password', 'role_id'])]
 #[Hidden(['password', 'remember_token'])]
@@ -78,5 +79,25 @@ class User extends Authenticatable
             Santiye::class,
             'santiye_user'
         )->withTimestamps();
+    }
+    public function puantajlar()
+    {
+        return $this->hasMany(Puantaj::class);
+    }
+
+    public function olusturduguPuantajlar()
+    {
+        return $this->hasMany(Puantaj::class, 'olusturan_user_id');
+    }
+    public function gunlukKayitlar()
+    {
+        return $this->belongsToMany(
+            GunlukKayit::class,
+            'gunluk_kayit_user'
+        )->withTimestamps();
+    }
+    public function metrajlar()
+    {
+        return $this->hasMany(Metraj::class);
     }
 }
