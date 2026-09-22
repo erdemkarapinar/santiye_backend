@@ -38,7 +38,6 @@ class SantiyeController extends Controller
             'baslangic_zamani' => $validated['baslangic_zamani'] ?? null,
             'bitis_zamani' => $validated['bitis_zamani'] ?? null,
             'location' => $validated['location'] ?? null,
-            'user_id' => $user->id,
         ]);
 
         // Şantiyeyi oluşturan kullanıcıyı otomatik olarak

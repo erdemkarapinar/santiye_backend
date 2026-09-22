@@ -85,5 +85,10 @@ Route::middleware('auth:sanctum')->group(function () {
         EkibimController::class,
         'santiyeAta'
     ]);
+
+    Route::get(
+        '/ekibim/{user}/santiyeler',
+        [EkibimController::class, 'personelinSantiyeleri']
+    );
 });
 

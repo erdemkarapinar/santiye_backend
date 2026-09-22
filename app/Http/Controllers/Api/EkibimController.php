@@ -139,4 +139,33 @@ class EkibimController extends Controller
             ]
         ], 200);
     }
+    public function personelinSantiyeleri(Request $request, User $user)
+    {
+        $girisYapanUser = $request->user();
+
+        // Bu personel giriş yapan kullanıcının ekibinde mi?
+        $ekipUyesiMi = $girisYapanUser
+            ->olusturduguReferanslar()
+            ->where('kullanan_user_id', $user->id)
+            ->exists();
+
+        if (!$ekipUyesiMi) {
+            return response()->json([
+                'message' => 'Bu kullanıcı sizin ekibinizde bulunmuyor.'
+            ], 403);
+        }
+
+        // Personelin bağlı olduğu şantiyeleri getir
+        $santiyeler = $user->santiyeler()
+            ->with('user')
+            ->get();
+
+        return response()->json([
+            'message' => 'Personelin görev yaptığı şantiyeler başarıyla getirildi.',
+            'data' => [
+                'personel' => $user->load('role'),
+                'santiyeler' => $santiyeler,
+            ]
+        ], 200);
+    }
 }
